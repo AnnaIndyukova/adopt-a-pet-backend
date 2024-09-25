@@ -16,5 +16,6 @@ Shelters can register and provide detailed information about their animals, whil
 
 ## Links
 
+[API](https://api.adoptapet.soon.it/) \
 [Live Website](https://adoptapet.soon.it/) \
 [Frontend Repository](https://github.com/AnnaIndyukova/adopt-a-pet-frontend)
