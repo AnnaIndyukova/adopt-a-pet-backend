@@ -53,7 +53,9 @@ const deletePet = (req, res, next) => {
     .orFail()
     .then((pet) => {
       if (String(pet.owner) !== req.user._id) {
-        next(new ForbiddenError("User is not authorized to delete this pet"));
+        return next(
+          new ForbiddenError("User is not authorized to delete this pet"),
+        );
       }
       return pet.deleteOne().then(() => {
         res.send({ message: "Pet deleted" });
@@ -84,7 +86,7 @@ const updatePetStatus = (req, res, next) => {
       }
       return Pet.findByIdAndUpdate(
         petId,
-        { petStatus: petStatus },
+        { petStatus },
         {
           new: true,
           runValidators: true,
