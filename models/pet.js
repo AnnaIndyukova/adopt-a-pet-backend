@@ -1,6 +1,20 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
 
+const coordinatesSchema = new mongoose.Schema(
+  {
+    lat: {
+      type: Number,
+      required: true,
+    },
+    lng: {
+      type: Number,
+      required: true,
+    },
+  },
+  { _id: false },
+);
+
 const petSchema = new mongoose.Schema(
   {
     petNameID: {
@@ -51,7 +65,7 @@ const petSchema = new mongoose.Schema(
       required: [true, "The city field is required"],
     },
     coordinates: {
-      type: String,
+      type: coordinatesSchema,
       required: [true, "The coordinates field is required"],
     },
     shelterEmail: {
