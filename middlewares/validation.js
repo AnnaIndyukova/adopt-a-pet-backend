@@ -35,7 +35,7 @@ const validatePetCardBody = celebrate({
     }),
     imageUrl: Joi.string().required().custom(validateURL).messages({
       "string.empty": 'The "imageUrl" field must be filled in',
-      "string.uri": 'the "imageUrl" field must be a valid url',
+      "string.uri": 'The "imageUrl" field must be a valid url',
     }),
     petStatus: Joi.string()
       .valid("available", "notAvailable")
@@ -51,9 +51,22 @@ const validatePetCardBody = celebrate({
     city: Joi.string().required().messages({
       "string.empty": 'The "city" field must be filled in',
     }),
-    coordinates: Joi.string().required().messages({
-      "string.empty": 'The "coordinates" field must be filled in',
-    }),
+    coordinates: Joi.object()
+      .keys({
+        lat: Joi.number().required().messages({
+          "number.base": 'The "lat" field must be a number',
+          "any.required": 'The "lat" field is required',
+        }),
+        lng: Joi.number().required().messages({
+          "number.base": 'The "lng" field must be a number',
+          "any.required": 'The "lng" field is required',
+        }),
+      })
+      .required()
+      .messages({
+        "object.base": 'The "coordinates" field must be an object',
+        "any.required": 'The "coordinates" field is required',
+      }),
     shelterEmail: Joi.string().required().email().messages({
       "string.empty": 'The "shelterEmail" field must be filled in',
       "string.email": 'the "shelterEmail" field must be a valid email',
@@ -91,9 +104,22 @@ const validateUserBody = celebrate({
     city: Joi.string().required().messages({
       "string.empty": 'The "city" field must be filled in',
     }),
-    coordinates: Joi.string().required().messages({
-      "string.empty": 'The "coordinates" field must be filled in',
-    }),
+    coordinates: Joi.object()
+      .keys({
+        lat: Joi.number().required().messages({
+          "number.base": 'The "lat" field must be a number',
+          "any.required": 'The "lat" field is required',
+        }),
+        lng: Joi.number().required().messages({
+          "number.base": 'The "lng" field must be a number',
+          "any.required": 'The "lng" field is required',
+        }),
+      })
+      .required()
+      .messages({
+        "object.base": 'The "coordinates" field must be an object',
+        "any.required": 'The "coordinates" field is required',
+      }),
     userType: Joi.string().valid("shelter", "petParent").required().messages({
       "any.requared": 'The "userType" field must be filled in',
       "any.only":
@@ -125,9 +151,22 @@ const validateUserProfileData = celebrate({
     city: Joi.string().required().messages({
       "string.empty": 'The "city" field must be filled in',
     }),
-    coordinates: Joi.string().required().messages({
-      "string.empty": 'The "coordinates" field must be filled in',
-    }),
+    coordinates: Joi.object()
+      .keys({
+        lat: Joi.number().required().messages({
+          "number.base": 'The "lat" field must be a number',
+          "any.required": 'The "lat" field is required',
+        }),
+        lng: Joi.number().required().messages({
+          "number.base": 'The "lng" field must be a number',
+          "any.required": 'The "lng" field is required',
+        }),
+      })
+      .required()
+      .messages({
+        "object.base": 'The "coordinates" field must be an object',
+        "any.required": 'The "coordinates" field is required',
+      }),
   }),
 });
 

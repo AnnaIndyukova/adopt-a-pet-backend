@@ -2,6 +2,20 @@ const mongoose = require("mongoose");
 const validator = require("validator");
 const bcrypt = require("bcryptjs");
 
+const coordinatesSchema = new mongoose.Schema(
+  {
+    lat: {
+      type: Number,
+      required: true,
+    },
+    lng: {
+      type: Number,
+      required: true,
+    },
+  },
+  { _id: false },
+);
+
 const userSchema = new mongoose.Schema(
   {
     name: {
@@ -31,7 +45,7 @@ const userSchema = new mongoose.Schema(
       required: [true, "The city field is required"],
     },
     coordinates: {
-      type: String,
+      type: coordinatesSchema,
       required: [true, "The coordinates field is required"],
     },
     userType: {
@@ -40,12 +54,12 @@ const userSchema = new mongoose.Schema(
       enum: ["shelter", "petParent"],
     },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 userSchema.statics.findUserByCredentials = function findUserByCredentials(
   email,
-  password
+  password,
 ) {
   return this.findOne({ email })
     .select("+password")
